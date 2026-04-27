@@ -1,0 +1,53 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "name": "c55c34ee580dc16182dc",
+  "position": {
+    "x": 441.89006750241077,
+    "y": 396.2198649951784,
+    "z": 3000,
+    "height": 41.967213114754095,
+    "width": 290.06750241080039,
+    "tabOrder": 3000
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Data Lineage (DAG) from dbt:",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "14pt",
+                      "color": "#ffffff"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

@@ -1,0 +1,203 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "name": "1567ac928309089988a9",
+  "position": {
+    "x": 250.93965178688308,
+    "y": 456.03455949731637,
+    "z": 2000,
+    "height": 249.7332111532923,
+    "width": 1013.4101322162586,
+    "tabOrder": 2000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Standard"
+                    }
+                  },
+                  "Property": "Subject"
+                }
+              },
+              "queryRef": "Standard.Subject",
+              "nativeQueryRef": "Subject"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Student"
+                    }
+                  },
+                  "Property": "School Name"
+                }
+              },
+              "queryRef": "Student.School Name",
+              "nativeQueryRef": "School Name"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "__measures__"
+                    }
+                  },
+                  "Property": "Total Results"
+                }
+              },
+              "queryRef": "__measures__.Total Results",
+              "nativeQueryRef": "Total Results"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "__measures__"
+                    }
+                  },
+                  "Property": "Avg Score"
+                }
+              },
+              "queryRef": "__measures__.Avg Score",
+              "nativeQueryRef": "Avg Score"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "__measures__"
+                    }
+                  },
+                  "Property": "Pass Rate"
+                }
+              },
+              "queryRef": "__measures__.Pass Rate",
+              "nativeQueryRef": "Pass Rate"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "__measures__"
+                    }
+                  },
+                  "Property": "Excellence Rate"
+                }
+              },
+              "queryRef": "__measures__.Excellence Rate",
+              "nativeQueryRef": "Excellence Rate"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Results Table'"
+                }
+              }
+            },
+            "titleWrap": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "16D"
+                }
+              }
+            },
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "20D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "border": [
+        {
+          "properties": {
+            "width": {
+              "expr": {
+                "Literal": {
+                  "Value": "1D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "dropShadow": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "stylePreset": [
+        {
+          "properties": {
+            "name": {
+              "expr": {
+                "Literal": {
+                  "Value": "'None'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

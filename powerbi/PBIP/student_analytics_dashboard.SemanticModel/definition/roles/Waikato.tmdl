@@ -1,0 +1,7 @@
+role Waikato
+	modelPermission: read
+
+	tablePermission Student = [School Region] == "Waikato"
+
+	annotation PBI_Id = af18e5add9f8461399adca1d6adb3e62
+

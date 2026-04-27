@@ -1,0 +1,78 @@
+table Results
+	lineageTag: 3e4a5adb-018d-4c23-ac9f-4361898f735e
+
+	column Result_id
+		dataType: int64
+		lineageTag: 25457bab-1cc1-4c05-9324-1f9783f0b9d7
+		summarizeBy: count
+		sourceColumn: Result_id
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Student_id
+		dataType: int64
+		lineageTag: 699e19b8-e552-4be6-8887-8be32438ad4d
+		summarizeBy: none
+		sourceColumn: Student_id
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Standard_id
+		dataType: int64
+		lineageTag: cc577840-b2b9-4fe0-a551-f06b7981f7af
+		summarizeBy: none
+		sourceColumn: Standard_id
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Year
+		dataType: int64
+		lineageTag: 91aaa8d9-53de-4cc8-8535-a9fddd846be7
+		summarizeBy: sum
+		sourceColumn: Year
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Result Score'
+		dataType: int64
+		lineageTag: f44b23d5-7dca-47b5-960b-63c92324af6d
+		summarizeBy: sum
+		sourceColumn: Result Score
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Result
+		dataType: string
+		lineageTag: d81715ca-183b-4e66-878f-f13fcde68bc0
+		summarizeBy: none
+		sourceColumn: Result
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Results = m
+		mode: import
+		source =
+				let
+				    Source = Snowflake.Databases("MCCZFXQ-QF81091.snowflakecomputing.com","ANALYTICS_WH",[Implementation="2.0"]),
+				    ANALYTICS_Database = Source{[Name="ANALYTICS",Kind="Database"]}[Data],
+				    DEV_MARTS_Schema = ANALYTICS_Database{[Name="DEV_MARTS",Kind="Schema"]}[Data],
+				    FCT_RESULTS_Table = DEV_MARTS_Schema{[Name="FCT_RESULTS",Kind="Table"]}[Data],
+				    #"Renamed Columns" = Table.RenameColumns(FCT_RESULTS_Table,{{"RESULT_ID", "Result_id"}, {"STUDENT_ID", "Student_id"}, {"STANDARD_ID", "Standard_id"}, {"YEAR", "Year"}, {"RESULT_SCORE", "Result Score"}, {"RESULT", "Result"}}),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Renamed Columns",{{"Result_id", Int64.Type}, {"Student_id", Int64.Type}, {"Standard_id", Int64.Type}, {"Year", Int64.Type}, {"Result Score", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

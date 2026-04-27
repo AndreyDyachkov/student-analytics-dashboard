@@ -1,0 +1,70 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 50.655760948020465,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 618.38305001469371,
+            "y": 0
+          },
+          "nodeIndex": "Standard",
+          "size": {
+            "height": 192.09822885462572,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 50,
+            "y": 0
+          },
+          "nodeIndex": "Student",
+          "size": {
+            "height": 241.17144411160075,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 334.20156119318517,
+            "y": 0
+          },
+          "nodeIndex": "Results",
+          "size": {
+            "height": 247.61073565345106,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 852.38305001469371,
+            "y": 23.805367826725529
+          },
+          "nodeIndex": "__measures__",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "All tables",
+      "zoomValue": 93.177952279451333,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "All tables",
+  "defaultDiagram": "All tables"
+}

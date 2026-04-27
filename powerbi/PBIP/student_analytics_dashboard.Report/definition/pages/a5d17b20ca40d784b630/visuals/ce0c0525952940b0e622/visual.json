@@ -1,0 +1,209 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "name": "ce0c0525952940b0e622",
+  "position": {
+    "x": 14.811957569913211,
+    "y": 109.85535197685631,
+    "z": 0,
+    "height": 387.579556412729,
+    "width": 1249.1417550626809,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Goal:",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "14pt"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Provide insights into student academic performance across subjects, schools, and socio-economic contexts, enabling analysis of achievement trends and equity gaps.",
+                    "textStyle": {
+                      "fontSize": "14pt"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Data Pipeline:",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "14pt"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Synthetic data is ingested into ",
+                    "textStyle": {
+                      "fontSize": "14pt"
+                    }
+                  },
+                  {
+                    "value": "Snowflake",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "14pt"
+                    }
+                  },
+                  {
+                    "value": " from CSV sources, transformed using ",
+                    "textStyle": {
+                      "fontSize": "14pt"
+                    }
+                  },
+                  {
+                    "value": "dbt",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "14pt"
+                    }
+                  },
+                  {
+                    "value": " into a structured star schema (staging and marts layers), and visualised in ",
+                    "textStyle": {
+                      "fontSize": "14pt"
+                    }
+                  },
+                  {
+                    "value": "Power BI",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "14pt"
+                    }
+                  },
+                  {
+                    "value": " using an import model.",
+                    "textStyle": {
+                      "fontSize": "14pt"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Description",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "14pt"
+                    }
+                  },
+                  {
+                    "value": ":",
+                    "textStyle": {
+                      "fontSize": "14pt"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "The dashboard is structured into three layers, enabling both high-level insights and deep exploration: ",
+                    "textStyle": {
+                      "fontSize": "14pt"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": " Student Performance Overview,",
+                    "textStyle": {
+                      "fontSize": "14pt"
+                    }
+                  }
+                ],
+                "listType": "bullet"
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": " Performance by Socio-Economic Decile,",
+                    "textStyle": {
+                      "fontSize": "14pt"
+                    }
+                  }
+                ],
+                "listType": "bullet"
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": " and Subject-Level Analysis. ",
+                    "textStyle": {
+                      "fontSize": "14pt"
+                    }
+                  }
+                ],
+                "listType": "bullet"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "background": [
+        {
+          "properties": {
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "20D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "dropShadow": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

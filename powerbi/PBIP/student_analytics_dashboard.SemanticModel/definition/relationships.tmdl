@@ -1,0 +1,8 @@
+relationship AutoDetected_6f82884b-843a-4525-84ae-2f91256f1590
+	fromColumn: Results.Standard_id
+	toColumn: Standard.Standard_id
+
+relationship AutoDetected_c3cb3762-b7f0-470d-92ea-6c773a349597
+	fromColumn: Results.Student_id
+	toColumn: Student.Student_id
+

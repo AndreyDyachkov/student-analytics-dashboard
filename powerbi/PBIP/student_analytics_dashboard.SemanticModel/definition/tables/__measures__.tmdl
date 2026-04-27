@@ -1,0 +1,51 @@
+table __measures__
+	lineageTag: c64eb638-21b1-4a3f-b284-777381ca172c
+
+	measure 'Total Results' = COUNTROWS(Results)
+		formatString: 0
+		lineageTag: ff76697f-e4c6-4081-8a4c-627788c42897
+
+	measure 'Avg Score' = AVERAGE(Results[Result Score])
+		formatString: #,0.00
+		lineageTag: a4f29bde-6ca5-4d43-8474-bb2421b6b0fb
+
+	measure 'Pass Rate' =
+			
+			DIVIDE(
+			    CALCULATE(
+			        [Total Results],
+			         Results[Result] <> "Not Achieved"
+			    ),
+			    [Total Results]
+			)
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: af080db8-6571-40a2-8316-e808c6b72b1b
+
+	measure 'Excellence Rate' =
+			
+			DIVIDE(
+			    CALCULATE(
+			        [Total Results],
+			        Results[Result] = "Excellence"
+			    ),
+			    [Total Results]
+			)
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: 8ddb42cf-6207-4797-b427-4bed8906608e
+
+	column Value
+		isHidden
+		formatString: 0
+		lineageTag: 39dda9ef-6998-4d45-9025-326fd6fc0a77
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Value]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition __measures__ = calculated
+		mode: import
+		source = {1}
+
+	annotation PBI_Id = 97ce9f16f4b24781b7c93b6408fdb1a9
+

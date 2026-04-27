@@ -1,0 +1,82 @@
+table Student
+	lineageTag: 2cd78ca0-da84-4787-a092-0f2738227b26
+
+	column Student_id
+		dataType: int64
+		lineageTag: ece2a73a-f9f4-4cf1-824b-8932ed6399d5
+		summarizeBy: none
+		sourceColumn: Student_id
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Gender
+		dataType: string
+		lineageTag: 050d817f-8e64-4e31-9f7e-fd0f426d8e59
+		summarizeBy: none
+		sourceColumn: Gender
+
+		annotation SummarizationSetBy = Automatic
+
+	column Ethnicity
+		dataType: string
+		lineageTag: 30e0e56f-1b14-4b44-a6fe-a9bf898ec383
+		summarizeBy: none
+		sourceColumn: Ethnicity
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'School Name'
+		dataType: string
+		lineageTag: d59d69cc-e86d-4350-9a7a-0919503f6f02
+		summarizeBy: none
+		sourceColumn: School Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Decile
+		dataType: int64
+		lineageTag: b087656f-96fc-41c1-8651-9d16a9e79a95
+		summarizeBy: none
+		sourceColumn: Decile
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'School Region'
+		dataType: string
+		lineageTag: c5b7669b-655a-4abf-be4f-2703018ba567
+		dataCategory: StateOrProvince
+		summarizeBy: none
+		sourceColumn: School Region
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'School Region and Country' = ```
+			"New Zealand, " & [School Region] & " Region" 
+			```
+		lineageTag: c9ed5786-717b-41f2-b033-228274ce42a2
+		dataCategory: StateOrProvince
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Student = m
+		mode: import
+		source =
+				let
+				    Source = Snowflake.Databases("MCCZFXQ-QF81091.snowflakecomputing.com","ANALYTICS_WH",[Implementation="2.0"]),
+				    ANALYTICS_Database = Source{[Name="ANALYTICS",Kind="Database"]}[Data],
+				    DEV_MARTS_Schema = ANALYTICS_Database{[Name="DEV_MARTS",Kind="Schema"]}[Data],
+				    DIM_STUDENT_Table = DEV_MARTS_Schema{[Name="DIM_STUDENT",Kind="Table"]}[Data],
+				    #"Renamed Columns" = Table.RenameColumns(DIM_STUDENT_Table,{{"GENDER", "Gender"}, {"ETHNICITY", "Ethnicity"}, {"SCHOOL_NAME", "School Name"}, {"DECILE", "Decile"}, {"SCHOOL_REGION", "School Region"}, {"STUDENT_ID", "Student_id"}}),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Renamed Columns",{{"Student_id", Int64.Type}, {"Decile", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

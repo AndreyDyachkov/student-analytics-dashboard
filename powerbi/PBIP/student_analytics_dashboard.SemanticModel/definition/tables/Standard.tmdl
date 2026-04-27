@@ -1,0 +1,58 @@
+table Standard
+	lineageTag: ae09c960-d1d1-433b-8992-cc89655def07
+
+	column Standard_id
+		dataType: int64
+		lineageTag: 4cba38b7-3521-4edc-8b3d-5460e1a2ba15
+		summarizeBy: none
+		sourceColumn: Standard_id
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Subject
+		dataType: string
+		lineageTag: bbb794f8-5429-4b01-8b50-57af2e2ebcae
+		summarizeBy: none
+		sourceColumn: Subject
+
+		annotation SummarizationSetBy = Automatic
+
+	column Level
+		dataType: int64
+		lineageTag: 3aaa9245-67ab-4b95-bf23-fb3d5b4b0a7b
+		summarizeBy: none
+		sourceColumn: Level
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Credits
+		dataType: int64
+		lineageTag: 2cda3bbc-2329-440b-bb05-c49e33a8448a
+		summarizeBy: none
+		sourceColumn: Credits
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition Standard = m
+		mode: import
+		source =
+				let
+				    Source = Snowflake.Databases("MCCZFXQ-QF81091.snowflakecomputing.com","ANALYTICS_WH",[Implementation="2.0"]),
+				    ANALYTICS_Database = Source{[Name="ANALYTICS",Kind="Database"]}[Data],
+				    DEV_MARTS_Schema = ANALYTICS_Database{[Name="DEV_MARTS",Kind="Schema"]}[Data],
+				    DIM_STANDARD_Table = DEV_MARTS_Schema{[Name="DIM_STANDARD",Kind="Table"]}[Data],
+				    #"Renamed Columns" = Table.RenameColumns(DIM_STANDARD_Table,{{"SUBJECT", "Subject"}, {"LEVEL", "Level"}, {"CREDITS", "Credits"}, {"STANDARD_ID", "Standard_id"}}),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Renamed Columns",{{"Standard_id", Int64.Type}, {"Level", Int64.Type}, {"Credits", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+
