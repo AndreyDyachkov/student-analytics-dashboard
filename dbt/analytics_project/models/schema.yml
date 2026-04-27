@@ -1,0 +1,217 @@
+version: 2
+
+models:
+
+  # ======================
+  # STAGING LAYER
+  # ======================
+
+  - name: stg_students
+    description: "Staged student records sourced from the raw students table. One row per student."
+    columns:
+      - name: student_id
+        description: "Primary key uniquely identifying a student."
+        tests:
+          - not_null
+          - unique
+      - name: gender
+        description: "Student's gender, trimmed of whitespace."
+        tests:
+          - not_null
+      - name: ethnicity
+        description: "Student's ethnicity, title-cased and trimmed."
+        tests:
+          - not_null
+      - name: region
+        description: "Region where the student is located, title-cased and trimmed."
+        tests:
+          - not_null
+      - name: school_id
+        description: "Foreign key referencing the school the student is enrolled in."
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_schools')
+              field: school_id
+
+  - name: stg_schools
+    description: "Staged school records sourced from the raw schools table. One row per school."
+    columns:
+      - name: school_id
+        description: "Primary key uniquely identifying a school."
+        tests:
+          - not_null
+          - unique
+      - name: school_name
+        description: "Name of the school, title-cased and trimmed."
+        tests:
+          - not_null
+      - name: decile
+        description: "School decile rating (1–10), indicating relative socioeconomic ranking."
+        tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              min_value: 1
+              max_value: 10
+      - name: region
+        description: "Geographic region the school is located in, title-cased and trimmed."
+        tests:
+          - not_null
+
+  - name: stg_standards
+    description: "Staged curriculum standard records sourced from the raw standards table. One row per standard."
+    columns:
+      - name: standard_id
+        description: "Primary key uniquely identifying a curriculum standard."
+        tests:
+          - not_null
+          - unique
+      - name: subject
+        description: "Subject area the standard belongs to, title-cased and trimmed."
+        tests:
+          - not_null
+      - name: level
+        description: "Curriculum level associated with the standard."
+        tests:
+          - not_null
+      - name: credits
+        description: "Number of credits awarded for achieving this standard."
+        tests:
+          - not_null
+
+  - name: stg_results
+    description: "Staged assessment result records sourced from the raw results table. One row per result."
+    columns:
+      - name: result_id
+        description: "Primary key uniquely identifying a single assessment result."
+        tests:
+          - not_null
+          - unique
+      - name: student_id
+        description: "Foreign key referencing the student who produced this result."
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_students')
+              field: student_id
+      - name: standard_id
+        description: "Foreign key referencing the curriculum standard being assessed."
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_standards')
+              field: standard_id
+      - name: year
+        description: "The year in which the assessment result was recorded."
+        tests:
+          - not_null
+      - name: result
+        description: "Text result of the assessment. Expected values: Excellence, Merit, Achieved, or Not Achieved."
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['Excellence', 'Merit', 'Achieved', 'Not Achieved']
+
+  # ======================
+  # DIMENSION TABLES
+  # ======================
+
+  - name: dim_student
+    description: >
+      Student dimension table. One row per student, enriched with school attributes
+      by joining stg_students to stg_schools. Note: school_id is resolved at staging
+      and not carried through to this dimension.
+    columns:
+      - name: student_id
+        description: "Primary key for the student dimension."
+        tests:
+          - not_null
+          - unique
+      - name: gender
+        description: "Student's gender."
+        tests:
+          - not_null
+      - name: ethnicity
+        description: "Student's ethnicity."
+        tests:
+          - not_null
+      - name: school_name
+        description: "Name of the school the student is enrolled in, denormalised from stg_schools."
+        tests:
+          - not_null
+      - name: decile
+        description: "Decile rating of the student's school."
+        tests:
+          - not_null
+      - name: school_region
+        description: "Geographic region of the student's school."
+        tests:
+          - not_null
+
+  - name: dim_standard
+    description: "Curriculum standard dimension table. One row per standard."
+    columns:
+      - name: standard_id
+        description: "Primary key for the standard dimension."
+        tests:
+          - not_null
+          - unique
+      - name: subject
+        description: "Subject area of the standard."
+        tests:
+          - not_null
+      - name: level
+        description: "Curriculum level of the standard."
+        tests:
+          - not_null
+      - name: credits
+        description: "Number of credits awarded for this standard."
+        tests:
+          - not_null
+
+  # ======================
+  # FACT TABLE
+  # ======================
+
+  - name: fct_results
+    description: >
+      Fact table recording student assessment results. Grain is one row per result (result_id).
+      Includes both the raw text result and a numeric score derived from it
+      (Excellence = 3, Merit = 2, Achieved = 1, Not Achieved = 0).
+    columns:
+      - name: result_id
+        description: "Primary key uniquely identifying a single assessment result."
+        tests:
+          - not_null
+          - unique
+
+      - name: student_id
+        description: "Foreign key referencing the student dimension."
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_student')
+              field: student_id
+
+      - name: standard_id
+        description: "Foreign key referencing the curriculum standard dimension."
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_standard')
+              field: standard_id
+
+      - name: year
+        description: "The year in which the assessment result was recorded."
+        tests:
+          - not_null
+
+      - name: result_score
+        description: "Numeric representation of the result. Excellence = 3, Merit = 2, Achieved = 1, Not Achieved = 0."
+        tests:
+          - not_null
+
+      - name: result
+        description: "Raw text result of the assessment (Excellence, Merit, Achieved, Not Achieved)."
+        tests:
+          - not_null
