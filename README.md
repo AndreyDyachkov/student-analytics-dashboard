@@ -55,7 +55,7 @@ It demonstrates a modern data stack using Snowflake, dbt, and Power BI, covering
    ├─ dbt-dag.png
    ├─ powerbi-schema.png
    └─ snowflake_analytics_db.png
-
+```
 ---
 
 ## 🗄️ Data Model
@@ -65,6 +65,8 @@ A **star schema** is implemented for analytical performance.
 
 
 ## ⚙️ Data Pipeline
+![dbt DAG](screenshots/dbt-dag.png)
+
 
 ### 1. Data Ingestion
 - CSV files loaded into Snowflake (RAW schema)
@@ -75,14 +77,26 @@ A **star schema** is implemented for analytical performance.
 - Dependencies managed using `ref()` and `source()`
 
 ### 3. Data Quality
-- dbt tests:
-  - unique keys
-  - not null constraints
-  - referential integrity
+Key data quality checks implemented in dbt:
+
+- **Decile Range Validation**  
+  Ensures school decile values are within the valid range (1–10)
+
+- **Result Category Validation**  
+  Ensures only valid NCEA result values are present:
+  `Excellence`, `Merit`, `Achieved`, `Not Achieved`
+
+- **Primary Key Constraints**  
+  Enforced uniqueness of IDs (e.g., student_id, result_id)
+
+- **Referential Integrity**  
+  Validated relationships between fact and dimension tables
 
 ---
 
 ## 📈 Dashboard Features
+
+[📥 Open Dashboard PDF](powerbi/student_analytics_dashboard.pdf)
 
 ### 🟦 Overview
 - KPI cards (Total Results, Avg Score, Pass Rate, Excellence Rate)
