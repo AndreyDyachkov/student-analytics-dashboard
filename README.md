@@ -55,3 +55,82 @@ It demonstrates a modern data stack using Snowflake, dbt, and Power BI, covering
    ├─ dbt-dag.png
    ├─ powerbi-schema.png
    └─ snowflake_analytics_db.png
+
+---
+
+## 🗄️ Data Model
+
+A **star schema** is implemented for analytical performance.
+![Power BI Model](screenshots/powerbi-schema.png)
+
+
+## ⚙️ Data Pipeline
+
+### 1. Data Ingestion
+- CSV files loaded into Snowflake (RAW schema)
+
+### 2. Data Transformation (dbt)
+- Staging layer: data cleaning and standardisation
+- Mart layer: star schema (fact + dimensions)
+- Dependencies managed using `ref()` and `source()`
+
+### 3. Data Quality
+- dbt tests:
+  - unique keys
+  - not null constraints
+  - referential integrity
+
+---
+
+## 📈 Dashboard Features
+
+### 🟦 Overview
+- KPI cards (Total Results, Avg Score, Pass Rate, Excellence Rate)
+- Results distribution
+- Trend over time
+
+### 🟩 School & Equity Analysis
+- Performance by school
+- Decile-based analysis
+- Regional comparison
+
+### 🟨 Academic Deep Dive
+- Performance by subject and level
+- Credits vs results
+- Detailed table view
+
+---
+
+## 🔒 Security
+
+- Row-Level Security (RLS) implemented in Power BI
+- Supports region-based access control
+- Designed for scalable user-based filtering
+
+---
+
+## 🛠️ Tech Stack
+
+- Snowflake (Cloud Data Warehouse)
+- dbt (Data Transformation)
+- Power BI (Data Visualisation)
+- SQL
+- Python (Synthetic data generation)
+
+---
+
+## 🚀 How to Run the Project
+
+### 1. Set up Snowflake
+- Create database and schemas (`RAW`, `STAGING`, `MARTS`)
+- Upload CSV files into RAW layer
+
+---
+
+### 2. Run dbt
+
+```bash
+cd dbt/analytics_project
+dbt debug
+dbt run
+dbt test
