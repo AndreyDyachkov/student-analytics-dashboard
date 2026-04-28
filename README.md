@@ -115,33 +115,22 @@ Key data quality checks implemented in dbt:
 
 ---
 
-## 🔒 Security
-
-- Row-Level Security (RLS) implemented in Power BI
-- Supports region-based access control
-- Designed for scalable user-based filtering
-
----
-
 ## 🛠️ Tech Stack
 
 - Snowflake (Cloud Data Warehouse)
 - dbt (Data Transformation)
 - Power BI (Data Visualisation)
 - SQL
-- Python (Synthetic data generation)
 
 ---
 
 ## 🚀 How to Run the Project
 
-### 1. Set up Snowflake
+#### 1. Set up Snowflake
 - Create database and schemas (`RAW`, `STAGING`, `MARTS`)
 - Upload CSV files into RAW layer
 
----
-
-### 2. Run dbt
+#### 2. Run dbt
 
 ```bash
 cd dbt/analytics_project
