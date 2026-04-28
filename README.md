@@ -61,12 +61,12 @@ It demonstrates a modern data stack using Snowflake, dbt, and Power BI, covering
 ## 🗄️ Data Model
 
 A **star schema** is implemented for analytical performance.
-![Power BI Model](screenshots/powerbi-schema.png)
 
+<p align="center">
+  <img src="screenshots/powerbi-schema.png" width="85%">
+</p>
 
 ## ⚙️ Data Pipeline
-![dbt DAG](screenshots/dbt-dag.png)
-
 
 ### 1. Data Ingestion
 - CSV files loaded into Snowflake (RAW schema)
@@ -81,7 +81,7 @@ A **star schema** is implemented for analytical performance.
 - Dependencies managed using `ref()` and `source()`
 
 <p align="center">
-  <img src="screenshots/dbt-dag.png" width="75%">
+  <img src="screenshots/dbt-dag.png" width="85%">
 </p>
 
 ### 3. Data Quality
@@ -99,6 +99,30 @@ Key data quality checks implemented in dbt:
 
 - **Referential Integrity**  
   Validated relationships between fact and dimension tables
+
+---
+
+## 🔍 Technical Deep Dive: Key Files
+
+To explore the logic behind this project, you can view the core files directly:
+
+### 🏗️ dbt Transformation Layer
+| Layer | Model | Description |
+| :--- | :--- | :--- |
+| **Marts** | [`fct_results.sql`](dbt/analytics_project/models/marts/fct_results.sql) | Core fact table with performance metrics. |
+| **Marts** | [`dim_student.sql`](dbt/analytics_project/models/marts/dim_student.sql) | Student attributes and demographics. |
+| **Staging** | [`stg_results.sql`](dbt/analytics_project/models/staging/stg_results.sql) | Initial cleaning and NCEA standardisation. |
+| **Schema** | [`schema.yml`](dbt/analytics_project/models/schema.yml) | Documentation and testing constraints. |
+
+### 📊 Power BI & DAX Logic
+* **Full Report:** [`student_analytics_dashboard.pbix`](powerbi/student_analytics_dashboard.pbix)
+* **DAX Measures:** [`__measures__.tmdl`](powerbi/PBIP/student_analytics_dashboard.SemanticModel/definition/tables/__measures__.tmdl) — *View all calculated metrics and KPI logic.*
+* **Data Relationships:** [`relationships.tmdl`](powerbi/PBIP/student_analytics_dashboard.SemanticModel/definition/relationships.tmdl) — *Semantic model star schema.*
+* **Row-Level Security:** [Regional Security Roles](powerbi/PBIP/student_analytics_dashboard.SemanticModel/definition/roles/) — *Logic for Wellington, Auckland, and other regions.*
+
+---
+
+
 
 ---
 
