@@ -137,3 +137,6 @@ cd dbt/analytics_project
 dbt debug
 dbt run
 dbt test
+```
+
+Notes: This project uses synthetic data for demonstration purposes only.
