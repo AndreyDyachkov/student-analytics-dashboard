@@ -71,10 +71,18 @@ A **star schema** is implemented for analytical performance.
 ### 1. Data Ingestion
 - CSV files loaded into Snowflake (RAW schema)
 
+<p align="center">
+  <img src="screenshots/snowflake_analytics_db.png" width="50%">
+</p>
+
 ### 2. Data Transformation (dbt)
 - Staging layer: data cleaning and standardisation
 - Mart layer: star schema (fact + dimensions)
 - Dependencies managed using `ref()` and `source()`
+
+<p align="center">
+  <img src="screenshots/dbt-dag.png" width="75%">
+</p>
 
 ### 3. Data Quality
 Key data quality checks implemented in dbt:
